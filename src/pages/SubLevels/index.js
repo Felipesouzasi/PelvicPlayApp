@@ -23,6 +23,16 @@ const subLevelsByLevels = {
     16: [7],
   };
   
+  const exerciseNamesBySubLevel = {
+    1: 'Respiração',
+    2: 'Alongamento de Coluna',
+    3: 'Sapinho Relaxado',
+    4: 'Flat',
+    5: 'Alongamento de Piriforme',
+    6: 'Respiração Sentada',
+    7: 'Dancinha',
+    8: 'Bicicleta DD',
+  };
   
 const SubLevels = ({navigation}) => {
     const route = useRoute();
@@ -31,18 +41,21 @@ const SubLevels = ({navigation}) => {
     const {level} = route.params; //obtem o nivel passado como parametro
 
     const subLevel = subLevelsByLevels[level] || []; //subniveis dinamicos do nivel atual
-
-    return(
-        <View style = {styles.container}>
-            <Text style ={styles.title}>Exercícios do nível {level}</Text>
-            {subLevel.map((subLevel) => (
-                <LevelButton
-                    key={subLevel}
-                    title={`Exercicio ${subLevel}`}
-                    onPress={() => navigation.navigate("Exercises", {week, level, subLevel})
-                    }
-                />
-            ))}
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Exercícios do nível {level}</Text>
+        {subLevel.map((subLevelId) => {
+          const exerciseName = exerciseNamesBySubLevel[subLevelId] || `Exercício ${subLevelId}`;
+          return (
+            <LevelButton
+              key={subLevelId}
+              title={exerciseName}
+              onPress={() =>
+                navigation.navigate("Exercises", { week, level, subLevel: subLevelId })
+              }
+            />
+          );
+        })}
         </View>
     );
 };

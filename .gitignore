@@ -5,6 +5,7 @@ node_modules/
 
 # Expo
 .expo/
+.expo-shared/
 dist/
 web-build/
 expo-env.d.ts
@@ -25,12 +26,21 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 
-# macOS
+# macOS / Windows
 .DS_Store
+Thumbs.db
 *.pem
 
 # local env files
+.env
 .env*.local
+
+# vscode
+.vscode/
 
 # typescript
 *.tsbuildinfo
+
+# Android/iOS (caso use EAS build futuramente)
+android/
+ios/
