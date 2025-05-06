@@ -11,12 +11,19 @@ const LevelButton = ({ title, onPress }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#fad02c", 
-    width: 200, 
-    paddingVertical: 12,
-    borderRadius: 8,
-    marginVertical: 18,
-    alignItems: "center", 
+    backgroundColor: '#fad02c',
+    paddingVertical: 13, 
+    width: 200,            
+    alignItems: 'center',
+    paddingHorizontal: 35,
+    borderRadius: 50,           
+    borderWidth: 2,             
+    borderColor: '#fff',         
+    shadowColor: '#000',        
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+    marginVertical: 10,         
   },
   text: {
     fontSize: 16,

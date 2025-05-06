@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { WebView } from "react-native-webview";
@@ -47,21 +47,26 @@ const Exercises = () => {
   // Mostrar a câmera em tela cheia quando ativa
   if (showCamera && !exerciseFinished) {
     return (
-      <View style={styles.cameraContainer}>
-        <CameraView />
-        <View style={styles.buttonOverlay}>
-          <GeneralButton
-            title="Finalizar Exercício"
-            color="#1abc9c"
-            onPress={finishExercise}
-          />
+        <View style={styles.cameraContainer}>
+          <CameraView />
+          <View style={styles.buttonOverlay}>
+            <GeneralButton
+              title="Finalizar Exercício"
+              color="#1abc9c"
+              onPress={finishExercise}
+            />
+          </View>
         </View>
-      </View>
     );
   }
 
   // Tela padrão com vídeo e botão
   return (
+    <ImageBackground
+        source={require('../../assets/MainBack.png')}
+        style={styles.background}
+        imageStyle={{ opacity: 0.95 }}
+      >
     <View style={styles.container}>
       <Text style={styles.title}>
         Semana {week} - Nível {level} - Exercício {subLevel}
@@ -86,13 +91,17 @@ const Exercises = () => {
         />
       )}
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   container: {
     flex: 1,
-    backgroundColor: "rgb(39, 62, 146)",
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
@@ -100,13 +109,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     color: "#fff",
-    marginBottom: 20,
+    marginBottom: 180, //distancia entre o texto e o video
     textAlign: "center",
   },
   videoContainer: {
     width: "100%",
     height: 220,
-    marginBottom: 20,
+    marginBottom: 180, //
     backgroundColor: "#000",
     borderRadius: 10,
     overflow: "hidden",
@@ -121,7 +130,6 @@ const styles = StyleSheet.create({
     bottom: 30,
     left: 20,
     right: 20,
-    alignItems: "center",
   },
 });
 

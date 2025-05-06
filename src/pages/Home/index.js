@@ -1,51 +1,52 @@
 import React from 'react';
-import { View, Image, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // Importação de components
 import WeekButton from '../../components/WeekButton';
 
-const Home = ({ navigation}) => {
+const Home = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Image
-          source={require("../../assets/logoPP.png")}
-          style={styles.logo}
-        />
-       
-        {Array.from({ length: 8 }, (_, index) => (
-          <WeekButton
-            key={index}
-            title={`Semana ${index + 1}`}
-            onPress={() => navigation.navigate("Levels", { week: index + 1 })}
-          />
-        ))}
-      </ScrollView>
-    </View>
+    <ImageBackground
+      source={require('../../assets/MainBack.png')}
+      style={styles.background}
+      imageStyle={{ opacity: 0.95 }}
+    >
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {Array.from({ length: 8 }, (_, index) => (
+            <WeekButton
+              key={index}
+              title={`Atividade ${index + 1}`}
+              onPress={() => navigation.navigate("Levels", { week: index + 1 })}
+            />
+          ))}
+        </ScrollView>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   container: {
     flex: 1,
-    backgroundColor: "rgb(39, 62, 146)",
   },
+
   logo: {
-    paddingTop: 40,
-    width: "100%",
-    resizeMode: "contain",
-    alignItems: "center",
-    paddingVertical: 40,
-    justifyContent: "center",
     width: 300,
     height: 300,
+    resizeMode: "contain",
   },
   scrollContainer: {
-    paddingTop: 50,
+    paddingTop: 160,
     paddingVertical: 20,
     alignItems: "center",
   },
 });
+
 
 export default Home;

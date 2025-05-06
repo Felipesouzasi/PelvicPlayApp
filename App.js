@@ -18,10 +18,10 @@ export default function App() {
         <NavigationContainer>
               <Stack.Navigator initialRouteName="Splash">
                 <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="Levels" component={Levels} />
-                <Stack.Screen name="SubLevels" component={SubLevels} />
-                <Stack.Screen name="Exercises" component={Exercises} /> 
+                <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                <Stack.Screen name="Levels" component={Levels} options={{ headerShown: false }} />
+                <Stack.Screen name="SubLevels" component={SubLevels} options={{ headerShown: false }} />
+                <Stack.Screen name="Exercises" component={Exercises} options={{ headerShown: false }} /> 
             </Stack.Navigator> 
             <StatusBar style="auto" />
         </NavigationContainer>

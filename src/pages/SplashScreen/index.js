@@ -16,7 +16,7 @@ const SplashScreen = () => {
     return (
         <View style={styles.container}>
             <Image
-                source={require("../../assets/backgroundImage.png")}
+                source={require("../../assets/SplashScreen.png")}
                 style={styles.background}
             />
         </View>

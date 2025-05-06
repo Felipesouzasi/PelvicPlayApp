@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ImageBackground } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import LevelButton from "../../components/LevelButton";
 
@@ -22,6 +22,11 @@ const Levels = ({navigation}) => {
 
     const levels = levelsByWeek[week] || [];
     return(
+      <ImageBackground
+            source={require('../../assets/MainBack.png')}
+            style={styles.background}
+            imageStyle={{ opacity: 0.95 }}
+          >
         <View style = {styles.container}>
             <Text style ={styles.title}>Níveis da semana {week}</Text>
             {levels.map((level) => (
@@ -33,24 +38,26 @@ const Levels = ({navigation}) => {
                 />
             ))}
         </View>
+      </ImageBackground>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      //justifyContent: 'center',
-      paddingTop: 150,
-      alignItems: 'center',
-      backgroundColor: "rgb(39, 62, 146)",
-    },
-
-    title: {
-      fontSize: 22,
-      color: '#fff',
-      marginBottom: 20,
-      paddingBottom: 50,
-    },
-  });
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  container: {
+    flex: 1,
+    paddingTop: 150,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 22,
+    color: '#fff',
+    marginBottom: 20,
+    paddingBottom: 50,
+  },
+});
   
   export default Levels;
