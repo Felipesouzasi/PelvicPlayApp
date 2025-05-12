@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { WebView } from "react-native-webview";
 import GeneralButton from "../../components/GeneralButton";
 import CameraView from "../../components/CameraView";
+import { subLevelsByLevels, levelsByWeek } from '../../components/dataSubLevels'; 
 
 const videosBySubLevel = {
   1: "https://www.youtube.com/watch?v=2cufeBFlkq8",
@@ -31,17 +31,23 @@ const Exercises = () => {
     setShowCamera(true);
   };
 
-  const finishExercise = async () => {
-    const nextWeek = week + 1;
-    const saved = await AsyncStorage.getItem("unlockedWeeks");
-    const current = parseInt(saved) || 1;
-
-    if (nextWeek > current && nextWeek <= 8) {
-      await AsyncStorage.setItem("unlockedWeeks", String(nextWeek));
-    }
-
+  const finishExercise = () => {
     setExerciseFinished(true);
-    navigation.navigate("Home");
+    const subLevels = subLevelsByLevels[level] || [];
+    const isLastSubLevel = subLevel === subLevels[subLevels.length - 1];
+
+    const levelsInWeek = levelsByWeek[week] || [];
+    const isLastLevel = level === levelsInWeek[levelsInWeek.length - 1];
+
+    if (isLastSubLevel) {
+      if (isLastLevel) {
+        navigation.navigate("Home");
+      } else {
+        navigation.navigate("Levels", { week });
+      }
+    } else {
+      navigation.navigate("SubLevels", { week, level });
+    }
   };
 
   // Mostrar a câmera em tela cheia quando ativa
@@ -69,7 +75,7 @@ const Exercises = () => {
       >
     <View style={styles.container}>
       <Text style={styles.title}>
-        Semana {week} - Nível {level} - Exercício {subLevel}
+        Semana {week}  |  Nível {level}  |  Exercício {subLevel}
       </Text>
 
       {videoUrl && (
@@ -102,20 +108,21 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 20,
+    padding: 15,
     justifyContent: "center",
     alignItems: "center",
   },
   title: {
     fontSize: 22,
     color: "#fff",
-    marginBottom: 180, //distancia entre o texto e o video
+    marginTop: 10, //distancia entre o topo e o texto
+    marginBottom: 20, //distancia entre o texto e o video
     textAlign: "center",
   },
   videoContainer: {
     width: "100%",
     height: 220,
-    marginBottom: 180, //
+    marginBottom: 350, 
     backgroundColor: "#000",
     borderRadius: 10,
     overflow: "hidden",
@@ -127,9 +134,9 @@ const styles = StyleSheet.create({
   },
   buttonOverlay: {
     position: "absolute",
-    bottom: 30,
-    left: 20,
-    right: 20,
+    bottom: 40,
+    left: 90,
+    right: 20,	
   },
 });
 

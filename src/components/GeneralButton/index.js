@@ -18,10 +18,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 8,
     marginTop: 20,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    
   },
   text: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 18,
     textAlign: "center",
     fontWeight: "bold",
   },

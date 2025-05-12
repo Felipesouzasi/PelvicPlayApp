@@ -2,25 +2,13 @@ import React from "react";
 import { StyleSheet, View, Text, ImageBackground } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import LevelButton from "../../components/LevelButton";
-
-//array dinamico para organizar os niveis em suas deveras semanas
-const levelsByWeek = {
-    1: [1, 2],
-    2: [3, 4],
-    3: [5, 6],
-    4: [7, 8],
-    5: [9, 10],
-    6: [11, 12],
-    7: [13, 14],
-    8: [15, 16],
-  };
+import { levelsByWeek } from '../../components/dataSubLevels'; 
   
 const Levels = ({navigation}) => {
     const route = useRoute();
-    //const navigation = useNavigation();
     const {week} = route.params; //obtem a semana passada como parametro
-
     const levels = levelsByWeek[week] || [];
+
     return(
       <ImageBackground
             source={require('../../assets/MainBack.png')}
@@ -49,14 +37,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 150,
+    paddingTop: 90,
     alignItems: 'center',
   },
   title: {
     fontSize: 22,
     color: '#fff',
     marginBottom: 20,
-    paddingBottom: 50,
+    paddingBottom: 110,
   },
 });
   
